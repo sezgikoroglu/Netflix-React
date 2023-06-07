@@ -3,39 +3,56 @@ import { useParams } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getMoviesByGenre } from '../services/movies'
-import { getCategories } from '../services/movies'
+import { getMoviesByGenre,getCategories } from '../services/movies'
+import { getTvCategories, getTvByGenre} from '../services/tv'
 
-const MoviesByGenre = () => {
+const ListByGenre = () => {
 
     const dispatch=useDispatch()
     const params=useParams()
 
-    const moviesByGenre= useSelector(
-        (state) => state.movies.moviesByGenre
-    );
+    console.log(params.type)
 
-    const categories= useSelector(
-        (state) => state.movies.categories
-    );
-    console.log(moviesByGenre)
+    if (params.type==="movie"){}
+
+    const listByGenre = useSelector((state) => {
+      let list;
+      let categories;
+      if (params.type === "movie") {
+         list= state.movies.moviesByGenre;
+         categories= state.movies.categories;
+      }
+      else if(params.type === "tv") {
+         list= state.tv.tvByGenre;
+         categories= state.tv.categories;
+      }
+
+      return {list,categories}
+    });
 
     useEffect(()=>{
+      if (params.type==="movie"){
         dispatch(getMoviesByGenre(params.id))
         dispatch(getCategories())
+      }
+      else if(params.type==="tv"){
+        dispatch(getTvByGenre(params.id))
+        dispatch(getTvCategories())
+      }
+        
     },[params.id])
 
   return (
     <div className=' space-x-10  lg:h-[65vh] mt-20 p-12 items-center'>
         <h2 className="capitalize w-56 md:text-2xl cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-white">
             {
-              categories.find(ctg=>ctg.id == params.id )?.name
+              listByGenre.categories.find(ctg=>ctg.id == params.id )?.name
             }
         </h2>
         
         <div className='grid grid-cols-3 gap-6 mt-7'>
             {
-            moviesByGenre.map(movie=>(
+            listByGenre.list.map(movie=>(
               <div key={"movies"+movie.id} className='w-full h-full flex flex-col gap-2 items-center'>
                 <Link to={"/movie/"+movie.id} className='relative w-full h-full flex flex-col gap-2 items-center' >
                     <img  className='relative object-cover rounded-sm  md:rounded md:hover:scale-110 transition duration-200 ease-out'
@@ -56,4 +73,4 @@ const MoviesByGenre = () => {
   )
 }
 
-export default MoviesByGenre
+export default ListByGenre

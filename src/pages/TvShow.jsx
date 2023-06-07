@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import GenreContainer from '../container/GenreContainer'
 import { useDispatch,useSelector } from 'react-redux'
-import { getCategories } from '../services/tv'
+import { getTvCategories } from '../services/tv'
 
 const TvShow = () => {
 
@@ -10,11 +10,11 @@ const TvShow = () => {
   console.log(genres)
 
   useEffect(() => {
-    dispatch(getCategories())
+    dispatch(getTvCategories())
   }, []);
 
   return (
-    <GenreContainer genres={genres}/>
+    <GenreContainer genres={genres} type={"tv"} />
   )
 }
 

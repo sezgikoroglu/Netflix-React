@@ -1,10 +1,11 @@
 import { createAsyncThunk,createSlice,PayloadAction } from "@reduxjs/toolkit";
-import { getCategories } from "../../services/tv";
+import { getTvCategories,getTvByGenre } from "../../services/tv";
 
 const tvSlice=createSlice({
     name:"tv",
     initialState:{
         categories:[],
+        tvByGenre:[]
     },
     reducers:{
         setSearch(state, action) {
@@ -13,9 +14,12 @@ const tvSlice=createSlice({
     },
     
     extraReducers: builder => {
-        builder.addCase(getCategories.fulfilled, (state, action) => {
+        builder.addCase(getTvCategories.fulfilled, (state, action) => {
            state.categories = action?.payload ? (Array.isArray([action.payload]) ? action.payload : []) : [];
         });
+        builder.addCase(getTvByGenre.fulfilled, (state, action) => {
+            state.tvByGenre = action?.payload ? (Array.isArray([action.payload]) ? action.payload : []) : [];
+         });
     }
 })
 

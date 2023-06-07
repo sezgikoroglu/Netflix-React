@@ -14,7 +14,7 @@ const Movies = () => {
   }, []);
 
   return (
-    <GenreContainer genres={genres}/>
+    <GenreContainer genres={genres} type={"movie"}/>
   )
 }
 
