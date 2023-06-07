@@ -15,7 +15,7 @@ const Router = () => {
                 <Route index element={<Home />} /> 
                 <Route path='/movies' element={<Movies/>}></Route>
                 <Route path='/genre/:id/type/:type' element={<ListByGenre/>}/>
-                <Route path="/movie/:id" element={<SingleMovie />} />
+                <Route path="/detail/:id/type/:type" element={<SingleMovie />} />
                 <Route path='/tvShows' element={<TvShow/>}></Route>
             </Route>
         </Routes>

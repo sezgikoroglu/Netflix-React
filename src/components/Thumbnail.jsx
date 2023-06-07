@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Thumbnail = ({ movie }) => {
+const Thumbnail = ({ movie,type }) => {
   return (
     <div
       className="relative h-[130px]  min-w-[180px] cursor-pointer transition duration-200
     ease-out md:h-36 md:min-w-[260px] md:hover:scale-105"
     >
       <div className="relative h-[130px]">
-        <Link to={"/movie/"+movie.id}>
+        <Link to={"/detail/"+movie.id+"/type/"+type}>
           <img
             src={`https://image.tmdb.org/t/p/w500${
               movie.poster_path || movie?.poster_path

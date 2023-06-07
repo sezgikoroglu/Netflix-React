@@ -13,8 +13,7 @@ const ListByGenre = () => {
 
     console.log(params.type)
 
-    if (params.type==="movie"){}
-
+  
     const listByGenre = useSelector((state) => {
       let list;
       let categories;
@@ -54,7 +53,7 @@ const ListByGenre = () => {
             {
             listByGenre.list.map(movie=>(
               <div key={"movies"+movie.id} className='w-full h-full flex flex-col gap-2 items-center'>
-                <Link to={"/movie/"+movie.id} className='relative w-full h-full flex flex-col gap-2 items-center' >
+                <Link to={"/detail/"+movie.id+"/type/"+params.type} className='relative w-full h-full flex flex-col gap-2 items-center' >
                     <img  className='relative object-cover rounded-sm  md:rounded md:hover:scale-110 transition duration-200 ease-out'
                         src={`https://image.tmdb.org/t/p/w500${movie?.poster_path || movie?.backdrop_path}`}
                         height={600}

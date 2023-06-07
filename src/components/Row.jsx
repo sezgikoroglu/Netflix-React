@@ -3,7 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import Thumbnail from "./Thumbnail";
 import { useState, useRef } from 'react'
 
-const Row = ({ title, movies }) => {
+const Row = ({ title, list,type }) => {
 
   const rowRef = useRef(null)
   const [isMoved,setIsMoved]=useState(false)
@@ -13,9 +13,7 @@ const Row = ({ title, movies }) => {
 
     if (rowRef.current){
       const{scrollLeft, clientWidth} = rowRef.current
-
       const scrollTo = direction === "left" ? scrollLeft - clientWidth : scrollLeft+clientWidth
-      
       rowRef.current.scrollTo({left : scrollTo , behavior:"smooth"})
     }
   }
@@ -36,8 +34,8 @@ const Row = ({ title, movies }) => {
           ref={rowRef}
           className="flex items-center space-x-0.5  overflow-x-scroll scrollbar-hide md:space-x-2.5 md:p-2 "
         >
-          {movies?.map((movie) => (
-            <Thumbnail key={"movieThm" + movie.id} movie={movie} />
+          {list?.map((movie) => (
+            <Thumbnail key={"movieThm" + movie.id} movie={movie} type={type}/>
           ))}
         </div>
         <ChevronRightIcon

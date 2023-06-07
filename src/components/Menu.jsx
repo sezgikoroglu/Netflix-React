@@ -7,6 +7,9 @@ const Menu = ({genres,type}) => {
    console.log(type)
   return (
     <div className=" flex gap-14 items-center absolute top-[80px] left-[40px] z-10 ">
+      {
+        type==="movie" ? <h2 className="mr-[15px] font-medium text-4xl">Movies</h2> : <h2 className="mr-[15px] font-medium text-4xl">TV Shows</h2>
+      }
       <ul className="demoDropdown">
         <li>
           <a href="#">Genre</a>
